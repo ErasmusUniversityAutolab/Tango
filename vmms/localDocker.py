@@ -161,11 +161,19 @@ class LocalDocker:
         """
         instanceName = self.instanceName(vm.id, vm.image)
         volumePath = self.getVolumePath(instanceName)
-        shutil.move(volumePath + 'feedback', destFile)
-        self.log.debug('Copied feedback file to %s' % destFile)
-        self.destroyVM(vm)
 
-        return 0
+        status = 0
+        try:
+            shutil.move(volumePath + 'feedback', destFile)
+            self.log.debug('Copied feedback file to %s' % destFile)
+        except:
+            self.log.error("Failed to move feedback file %s to destination %s" % 
+                    (volumePath+'feedback', destFile))
+            status = 1
+        finally:
+            self.destroyVM(vm)
+
+        return status
 
     def destroyVM(self, vm):
         """ destroyVM - Delete the docker container.
