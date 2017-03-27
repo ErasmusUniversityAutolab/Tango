@@ -44,6 +44,8 @@ then
 	build_if_needed
 fi
 
+docker rmi $(docker images -f "dangling=true" -q)
+
 docker images
 
 # Since we've started the supervisor service in the background,
