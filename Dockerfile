@@ -1,5 +1,5 @@
 # Start with empty ubuntu machine
-FROM ubuntu:15.04
+FROM ubuntu:16.04
 
 MAINTAINER Autolab Development Team "autolab-dev@andrew.cmu.edu"
 
@@ -35,17 +35,20 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     lxc \
     iptables \
+    redis-server \
+    docker.io \
+    docker-compose \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # Install Redis
-RUN wget http://download.redis.io/releases/redis-stable.tar.gz && tar xzf redis-stable.tar.gz
-WORKDIR /opt/redis-stable
-RUN make && make install
+#RUN wget http://download.redis.io/releases/redis-stable.tar.gz && tar xzf redis-stable.tar.gz
+#WORKDIR /opt/redis-stable
+#RUN make && make install
 WORKDIR /opt/TangoService/Tango/
 
 # Install Docker from Docker Inc. repositories.
-RUN curl -sSL https://get.docker.com/ | sh
+#RUN curl -sSL https://get.docker.com/ | sh
 
 # Install the magic wrapper.
 ADD ./wrapdocker /usr/local/bin/wrapdocker

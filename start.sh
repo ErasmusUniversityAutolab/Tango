@@ -27,7 +27,7 @@ build_if_needed() {
 	cd ..
 }
 
-service docker start
+# service docker start
 service supervisor start &
 sleep 5
 
