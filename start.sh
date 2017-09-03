@@ -11,7 +11,7 @@ build_images() {
 
 clone_images() {
 	echo "Cloning autograding Dockerfiles from GitHub ..."
-	git clone https://github.com/ErasmusUniversityAutolab/AutogradingDocker ${IMAGES_DIR}
+	git clone git@github.com:ErasmusUniversityAutolab/AutogradingDocker.git ${IMAGES_DIR}
 }
 
 build_if_needed() {
